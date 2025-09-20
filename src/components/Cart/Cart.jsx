@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
+import CartItem from '../CartItem'
 
 function Cart() {
   const dispatch = useDispatch()
@@ -9,18 +10,6 @@ function Cart() {
 
   const [isOpen, setIsOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
-
-  const handleRemoveItem = (id) => {
-    dispatch({ type: 'app/removeFromCart', payload: id })
-  }
-
-  const handleUpdateQuantity = (id, quantity) => {
-    if (quantity <= 0) {
-      handleRemoveItem(id)
-      return
-    }
-    dispatch({ type: 'app/updateQuantity', payload: { id, quantity } })
-  }
 
   const handleCheckout = () => {
     setShowCheckout(true)
@@ -53,30 +42,7 @@ function Cart() {
               {cart.length === 0 ? (
                 <p>Корзина пуста</p>
               ) : (
-                cart.map(item => (
-                  <div key={item.id} className="cart-item">
-                    <img src={item.image} alt={item.name} />
-                    <div className="item-details">
-                      <h4>{item.name}</h4>
-                      <p>${item.price}</p>
-                      <div className="quantity-controls">
-                        <button onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>
-                          -
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>
-                          +
-                        </button>
-                      </div>
-                    </div>
-                    <button
-                      className="remove-btn"
-                      onClick={() => handleRemoveItem(item.id)}
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                ))
+                <CartItem/>
               )}
             </div>
 
