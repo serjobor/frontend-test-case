@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUser } from '../../store/store'
+import { MOCK_USER } from '../../data/mockData'
+
 
 function UserInfo() {
   const dispatch = useDispatch()
@@ -8,11 +10,7 @@ function UserInfo() {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(setUser({
-        id: 1,
-        name: 'Иван Иванов',
-        email: 'ivan@example.com'
-      }))
+      dispatch(setUser(MOCK_USER))
     }, 500)
   }, [dispatch])
 

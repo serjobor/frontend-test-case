@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import ProductCard from '../ProductCard'
+import { PRODUCT_CATEGORIES, SORT_OPTIONS } from '../../data/constants'
 
 function ProductList() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [sortBy, setSortBy] = useState('name')
+  const [selectedCategory, setSelectedCategory] = useState(PRODUCT_CATEGORIES.ALL)
+  const [sortBy, setSortBy] = useState(SORT_OPTIONS.NAME)
   const [showFilters, setShowFilters] = useState(false)
 
   const handleSearchChange = (e) => {
@@ -33,17 +34,27 @@ function ProductList() {
           </div>
 
           <div className="filter-controls">
-            <select value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="all">Все категории</option>
-              <option value="phones">Телефоны</option>
-              <option value="laptops">Ноутбуки</option>
-              <option value="tablets">Планшеты</option>
-            </select>
+            {
+              showFilters ? 
+              <select value={selectedCategory} onChange={handleCategoryChange}>
+                <option value={PRODUCT_CATEGORIES.ALL}>Все категории</option>
+                <option value={PRODUCT_CATEGORIES.PHONES}>Телефоны</option>
+                <option value={PRODUCT_CATEGORIES.LAPTOPS}>Ноутбуки</option>
+                <option value={PRODUCT_CATEGORIES.TABLETS}>Планшеты</option>
+              </select>
+              :
+              <></>
+            }
 
-            <select value={sortBy} onChange={handleSortChange}>
-              <option value="name">По названию</option>
-              <option value="price">По цене</option>
-            </select>
+            {
+              showFilters ? 
+              <select value={sortBy} onChange={handleSortChange}>
+                <option value={SORT_OPTIONS.NAME}>По названию</option>
+                <option value={SORT_OPTIONS.PRICE}>По цене</option>
+              </select>
+              :
+              <></>
+            }
 
             <button onClick={() => setShowFilters(!showFilters)}>
               {showFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
