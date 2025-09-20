@@ -38,6 +38,11 @@ const ProductCard = ({
     return 0
   })
 
+  function addProductToCart(product) {
+    const action = { type: 'app/addToCart', payload: product }
+    dispatch(action)
+  }
+
   if (loading) {
     return <div className="loading">Загрузка товаров...</div>
   }
@@ -51,10 +56,7 @@ const ProductCard = ({
             <p>{product.description}</p>
             <div className="price">${product.price}</div>
             <button
-              onClick={() => {
-                const action = { type: 'app/addToCart', payload: product }
-                dispatch(action)
-              }}
+              onClick={ () => addProductToCart(product) }
             >
               Добавить в корзину
             </button>
