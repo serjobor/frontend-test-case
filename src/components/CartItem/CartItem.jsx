@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { removeFromCart, updateQuantity } from '../../store/store'
 
 function CartItem() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.app.cart)
 
   const handleRemoveItem = (id) => {
-    dispatch({ type: 'app/removeFromCart', payload: id })
+    // dispatch({ type: 'app/removeFromCart', payload: id })
+    dispatch(removeFromCart(id))
   }
 
   const handleUpdateQuantity = (id, quantity) => {
@@ -14,7 +16,8 @@ function CartItem() {
       handleRemoveItem(id)
       return
     }
-    dispatch({ type: 'app/updateQuantity', payload: { id, quantity } })
+    // dispatch({ type: 'app/updateQuantity', payload: { id, quantity } })
+    dispatch(updateQuantity({ id, quantity }))
   }
 
   return (

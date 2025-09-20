@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
 import CartItem from '../CartItem'
+import { clearCart } from '../../store/store'
 
 function Cart() {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ function Cart() {
     setShowCheckout(true)
     setTimeout(() => {
       alert('Заказ оформлен!')
-      dispatch({ type: 'app/clearCart' })
+      dispatch(clearCart())
       setShowCheckout(false)
       setIsOpen(false)
     }, 1000)

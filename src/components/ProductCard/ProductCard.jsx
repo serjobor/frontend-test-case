@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
-import {setProducts, setLoading } from '../../store/store'
+import {setProducts, setLoading, addToCart } from '../../store/store'
 
 const ProductCard = ({
   searchTerm,
@@ -38,9 +38,9 @@ const ProductCard = ({
     return 0
   })
 
-  function addProductToCart(product) {
-    const action = { type: 'app/addToCart', payload: product }
-    dispatch(action)
+  function handleaddProductToCart(product) {
+    // dispatch({ type: 'app/addToCart', payload: product })
+    dispatch(addToCart(product))
   }
 
   if (loading) {
@@ -56,7 +56,7 @@ const ProductCard = ({
             <p>{product.description}</p>
             <div className="price">${product.price}</div>
             <button
-              onClick={ () => addProductToCart(product) }
+              onClick={ () => handleaddProductToCart(product) }
             >
               Добавить в корзину
             </button>
