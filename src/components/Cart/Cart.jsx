@@ -39,11 +39,15 @@ function Cart() {
             </div>
 
             <div className="cart-items">
-              {cart.length === 0 ? (
+              {
+                cart.length === 0 
+                ? 
                 <p>Корзина пуста</p>
-              ) : (
-                <CartItem/>
-              )}
+                :
+                cart.map(cartItem => (
+                  <CartItem key={cartItem.id} cartItem={cartItem}/>
+                ))
+              }
             </div>
 
             <div className="cart-footer">

@@ -1,40 +1,32 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectLoading } from '../../store/reducers/ProductsSlice'
+import React, { memo } from 'react'
+import { useDispatch } from 'react-redux'
 import { addToCart } from '../../store/reducers/CartSlice'
 
-const ProductCard = ({
-  filteredProducts
+const ProductCard = memo(({
+  productCard
 }) => {
   const dispatch = useDispatch()
-  const loading = useSelector(selectLoading)
 
-  function handleAddProductToCart(product) {
-    dispatch(addToCart(product))
+  function handleAddProductToCart(productCard) {
+    dispatch(addToCart(productCard))
   }
 
-  if (loading) {
-    return <div className="loading">Загрузка товаров...</div>
-  }
   return (
     <>
-      <div className="products">
-        {filteredProducts.map(product => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <div className="price">${product.price}</div>
-            <button
-              onClick={ () => handleAddProductToCart(product) }
-            >
-              Добавить в корзину
-            </button>
-          </div>
-        ))}
+      <div className="product-card">
+        <img src={productCard.image} alt={productCard.name} />
+        <h3>{productCard.name}</h3>
+        <p>{productCard.description}</p>
+        <div className="price">${productCard.price}</div>
+        <button
+          onClick={() => handleAddProductToCart(productCard)}
+        >
+          Добавить в корзину
+        </button>
       </div>
+
     </>
   )
-}
+})
 
 export default ProductCard
