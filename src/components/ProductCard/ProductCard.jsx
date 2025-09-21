@@ -1,38 +1,13 @@
-import React, { useEffect } from 'react'
-import {useSelector, useDispatch } from 'react-redux'
-
-import { MOCK_PRODUCTS } from '../../data/mockData'
-import { PRODUCT_CATEGORIES, SORT_OPTIONS } from '../../data/constants'
-import { selectProducts, selectLoading, setProducts, setLoading } from '../../store/reducers/ProductsSlice'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectLoading } from '../../store/reducers/ProductsSlice'
 import { addToCart } from '../../store/reducers/CartSlice'
 
 const ProductCard = ({
-  searchTerm,
-  selectedCategory,
-  sortBy
+  filteredProducts
 }) => {
   const dispatch = useDispatch()
-  const products = useSelector(selectProducts)
   const loading = useSelector(selectLoading)
-
-  useEffect(() => {
-    dispatch(setLoading(true))
-
-    setTimeout(() => {
-      dispatch(setProducts(MOCK_PRODUCTS))
-      dispatch(setLoading(false))
-    }, 1000)
-  }, [dispatch])
-
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === PRODUCT_CATEGORIES.ALL || product.category === selectedCategory
-    return matchesSearch && matchesCategory
-  }).sort((a, b) => {
-    if (sortBy === SORT_OPTIONS.NAME) return a.name.localeCompare(b.name)
-    if (sortBy === SORT_OPTIONS.PRICE) return a.price - b.price
-    return 0
-  })
 
   function handleAddProductToCart(product) {
     dispatch(addToCart(product))
