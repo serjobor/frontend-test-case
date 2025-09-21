@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser } from '../../store/store'
+import { selectUser, setUser } from '../../store/reducers/UserSlice'
 import { MOCK_USER } from '../../data/mockData'
 
 
 function UserInfo() {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.app.user)
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     setTimeout(() => {

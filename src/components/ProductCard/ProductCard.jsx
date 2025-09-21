@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
-import {setProducts, setLoading, addToCart } from '../../store/store'
+
 import { MOCK_PRODUCTS } from '../../data/mockData'
 import { PRODUCT_CATEGORIES, SORT_OPTIONS } from '../../data/constants'
+import { selectProducts, selectLoading, setProducts, setLoading } from '../../store/reducers/ProductsSlice'
+import { addToCart } from '../../store/reducers/CartSlice'
 
 const ProductCard = ({
   searchTerm,
@@ -10,8 +12,8 @@ const ProductCard = ({
   sortBy
 }) => {
   const dispatch = useDispatch()
-  const products = useSelector((state) => state.app.products)
-  const loading = useSelector((state) => state.app.loading)
+  const products = useSelector(selectProducts)
+  const loading = useSelector(selectLoading)
 
   useEffect(() => {
     dispatch(setLoading(true))
@@ -33,7 +35,6 @@ const ProductCard = ({
   })
 
   function handleAddProductToCart(product) {
-    // dispatch({ type: 'app/addToCart', payload: product })
     dispatch(addToCart(product))
   }
 

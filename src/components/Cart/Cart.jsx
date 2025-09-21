@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
 import CartItem from '../CartItem'
-import { clearCart, selectCartStats } from '../../store/store'
+import { selectCart, selectCartStats, clearCart } from '../../store/reducers/CartSlice'
 
 function Cart() {
   const dispatch = useDispatch()
-  const cart = useSelector((state) => state.app.cart)
+  const cart = useSelector(selectCart)
   const cartStats = useSelector(selectCartStats)
 
   const [isOpen, setIsOpen] = useState(false)
