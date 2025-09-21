@@ -32,7 +32,7 @@ const ProductCard = ({
     return 0
   })
 
-  function handleaddProductToCart(product) {
+  function handleAddProductToCart(product) {
     // dispatch({ type: 'app/addToCart', payload: product })
     dispatch(addToCart(product))
   }
@@ -50,7 +50,7 @@ const ProductCard = ({
             <p>{product.description}</p>
             <div className="price">${product.price}</div>
             <button
-              onClick={ () => handleaddProductToCart(product) }
+              onClick={ () => handleAddProductToCart(product) }
             >
               Добавить в корзину
             </button>

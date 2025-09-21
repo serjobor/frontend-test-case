@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import {useSelector, useDispatch } from 'react-redux'
 import CartItem from '../CartItem'
-import { clearCart } from '../../store/store'
+import { clearCart, selectCartStats } from '../../store/store'
 
 function Cart() {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.app.cart)
-  const cartCount = useSelector((state) => state.app.cartCount)
-  const totalPrice = useSelector((state) => state.app.totalPrice)
+  const cartStats = useSelector(selectCartStats)
 
   const [isOpen, setIsOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
@@ -29,7 +28,7 @@ function Cart() {
           className="cart-toggle"
           onClick={() => setIsOpen(!isOpen)}
         >
-          Корзина ({cartCount})
+          Корзина ({cartStats.cartCount})
         </button>
 
         {isOpen && (
@@ -48,7 +47,7 @@ function Cart() {
             </div>
 
             <div className="cart-footer">
-              <div className="total">Итого: ${totalPrice}</div>
+              <div className="total">Итого: ${cartStats.totalPrice}</div>
               <button
                 className="checkout-btn"
                 onClick={handleCheckout}
