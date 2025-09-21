@@ -24,7 +24,6 @@ const ProductCard = memo(({
           Добавить в корзину
         </button>
       </div>
-
     </>
   )
 })

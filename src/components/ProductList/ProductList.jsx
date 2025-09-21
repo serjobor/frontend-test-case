@@ -42,11 +42,11 @@ function ProductList() {
 
   const handleCategoryChange = useCallback((e) => {
     setSelectedCategory(e.target.value)
-  })
+  }, [])
 
   const handleSortChange = useCallback((e) => {
     setSortBy(e.target.value)
-  })
+  }, [])
 
   return (
     <>
